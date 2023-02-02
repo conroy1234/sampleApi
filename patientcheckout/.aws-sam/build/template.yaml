@@ -10,7 +10,7 @@ Globals:
     Timeout: 20
     MemorySize: 128
 Resources:
-  PatientCheckoutBucket:
+  conroypatientcheckoutbucket:
     Type: AWS::S3::Bucket
     Properties:
       BucketName:
@@ -37,7 +37,7 @@ Resources:
           Type: S3
           Properties:
             Bucket:
-              Ref: PatientCheckoutBucket
+              Ref: conroypatientcheckoutbucket
             Events: s3:ObjectCreated:*
     Metadata:
       SamResourceId: PatientCheckoutFunction

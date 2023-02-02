@@ -12,7 +12,7 @@ Globals:
     MemorySize: 128
 
 Resources:
-  PatientCheckoutBucket:
+  conroypatientcheckoutbucket:
     Type: AWS::S3::Bucket
     Properties:
       BucketName:  !Sub ${AWS::StackName}-${AWS::AccountId}-${AWS::Region}
@@ -36,6 +36,6 @@ Resources:
         S3Event:
           Type: S3 # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
-            Bucket:  !Ref PatientCheckoutBucket
+            Bucket:  !Ref conroypatientcheckoutbucket
             Events: s3:ObjectCreated:*
 

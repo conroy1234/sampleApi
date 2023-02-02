@@ -2,9 +2,9 @@ version = 0.1
 [default]
 [default.deploy]
 [default.deploy.parameters]
-stack_name = "asyncLambda"
+stack_name = "patient-checkout"
 s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-1cbp11l5pltm7"
-s3_prefix = "asyncLambda"
+s3_prefix = "patient-checkout"
 region = "eu-west-2"
 capabilities = "CAPABILITY_IAM"
 image_repositories = []
