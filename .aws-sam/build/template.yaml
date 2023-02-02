@@ -1,0 +1,74 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: 'sampleApi
+
+  Sample SAM Template for sampleApi
+
+  '
+Globals:
+  Function:
+    Runtime: java11
+    MemorySize: 512
+    Timeout: 30
+    Environment:
+      Variables:
+        ORDER_TABLE:
+          Ref: OrderTable
+Resources:
+  OrderTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      PrimaryKey:
+        Name: id
+        Type: Number
+  sampleFunctionPost:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: sampleFunctionPost
+      Handler: org.sample.api.CreateOrder::CreateOrder
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: OrderTable
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /orders
+            Method: post
+    Metadata:
+      SamResourceId: sampleFunctionPost
+  sampleFunctionGet:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: sampleFunctionGet
+      Handler: org.sample.api.GetOrder::getOrder
+      Policies:
+      - DynamoDBCrudPolicy:
+          TableName:
+            Ref: OrderTable
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /orders
+            Method: get
+    Metadata:
+      SamResourceId: sampleFunctionGet
+Outputs:
+  CreateOrdersAPI:
+    Description: API Gateway endpoint url for creat orders function
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Stage/orders
+  CreateOrderFunction:
+    Description: ACreate order Lambda Function ARN
+    Value:
+      Fn::GetAtt:
+      - sampleFunctionPost
+      - Arn
+  GetOrderFunction:
+    Description: GET order Lambda Function IAM ROLE ARN
+    Value:
+      Fn::GetAtt:
+      - sampleFunctionGetRole
+      - Arn

@@ -1,0 +1,10 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "samplePostAndGet"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-1cbp11l5pltm7"
+s3_prefix = "samplePostAndGet"
+region = "eu-west-2"
+capabilities = "CAPABILITY_IAM"
+image_repositories = []
